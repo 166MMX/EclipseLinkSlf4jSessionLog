@@ -1,0 +1,22 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'com.initvoid.org.eclipse.persistence'
+archivesBaseName = 'logging-slf4j'
+version = '1.0'
+
+
+description = """EclipseLink SLF4J SessionLogger"""
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'org.eclipse.persistence:eclipselink:2.5.2'
+    compile 'org.codehaus.groovy:groovy-all:2.3.4'
+}
+
+
+
