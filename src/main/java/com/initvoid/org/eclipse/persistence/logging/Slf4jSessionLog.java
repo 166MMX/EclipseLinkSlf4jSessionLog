@@ -1,15 +1,11 @@
 package com.initvoid.org.eclipse.persistence.logging;
 
-import org.eclipse.persistence.internal.databaseaccess.Accessor;
-import org.eclipse.persistence.internal.sessions.AbstractSession;
 import org.eclipse.persistence.logging.AbstractSessionLog;
 import org.eclipse.persistence.logging.SessionLogEntry;
 import org.eclipse.persistence.sessions.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-
-import java.util.Date;
 
 public class Slf4jSessionLog extends AbstractSessionLog
 {
@@ -46,21 +42,24 @@ public class Slf4jSessionLog extends AbstractSessionLog
 
     private static Logger getLogger(SessionLogEntry entry)
     {
-        AbstractSession session = entry.getSession();
+        Session session = entry.getSession();
         String namespace = entry.getNameSpace();
         String sessionName = session == null ? null : session.getName();
+
         return getLogger(sessionName, namespace);
     }
 
     private static Logger getLogger(Session session, String namespace)
     {
         String sessionName = session == null ? null : session.getName();
+
         return getLogger(sessionName, namespace);
     }
 
     private static Logger getLogger(String sessionName, String namespace)
     {
         String loggerName = getLoggerName(sessionName, namespace);
+
         return LoggerFactory.getLogger(loggerName);
     }
 
@@ -212,25 +211,21 @@ public class Slf4jSessionLog extends AbstractSessionLog
 
     private void populateMdc(SessionLogEntry entry)
     {
-        Date entryDate = entry.getDate();
-        if (entryDate != null)
+        if (entry.getDate() != null)
         {
-            MDC.put(MDC_DATE_KEY, getDateString(entryDate));
+            MDC.put(MDC_DATE_KEY, getDateString(entry.getDate()));
         }
-        AbstractSession entrySession = entry.getSession();
-        if (entrySession != null)
+        if (entry.getSession() != null)
         {
-            MDC.put(MDC_SESSION_KEY, getSessionString(entrySession));
+            MDC.put(MDC_SESSION_KEY, getSessionString(entry.getSession()));
         }
-        Accessor entryConnection = entry.getConnection();
-        if (entryConnection != null)
+        if (entry.getConnection() != null)
         {
-            MDC.put(MDC_CONNECTION_KEY, getConnectionString(entryConnection));
+            MDC.put(MDC_CONNECTION_KEY, getConnectionString(entry.getConnection()));
         }
-        Thread entryThread = entry.getThread();
-        if (entryThread != null)
+        if (entry.getThread() != null)
         {
-            MDC.put(MDC_THREAD_KEY, getThreadString(entryThread));
+            MDC.put(MDC_THREAD_KEY, getThreadString(entry.getThread()));
         }
     }
 
