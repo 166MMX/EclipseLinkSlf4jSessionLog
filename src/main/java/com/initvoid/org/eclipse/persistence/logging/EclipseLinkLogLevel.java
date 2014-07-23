@@ -20,6 +20,9 @@ public enum EclipseLinkLogLevel
     private static final Map<Integer, EclipseLinkLogLevel> VALUE_MAP = new HashMap<>();
     private static final Map<String, EclipseLinkLogLevel>  LABEL_MAP = new HashMap<>();
 
+    private final int    value;
+    private final String label;
+
     static
     {
         for (EclipseLinkLogLevel level : values())
@@ -27,6 +30,12 @@ public enum EclipseLinkLogLevel
             VALUE_MAP.put(level.value, level);
             LABEL_MAP.put(level.label, level);
         }
+    }
+
+    private EclipseLinkLogLevel(int value, String label)
+    {
+        this.value = value;
+        this.label = label;
     }
 
     public static EclipseLinkLogLevel getByValue(int value)
@@ -37,15 +46,6 @@ public enum EclipseLinkLogLevel
     public static EclipseLinkLogLevel getByLabel(String label)
     {
         return LABEL_MAP.get(label);
-    }
-
-    private final int    value;
-    private final String label;
-
-    private EclipseLinkLogLevel(int value, String label)
-    {
-        this.value = value;
-        this.label = label;
     }
 
     public int getValue()

@@ -68,7 +68,7 @@ public class Slf4jSessionLog extends AbstractSessionLog
         switch (level)
         {
             case ALL:
-                throw new UnsupportedOperationException();
+                return true;
             case TRACE:
                 return logger.isTraceEnabled();
             case DEBUG:
@@ -91,7 +91,6 @@ public class Slf4jSessionLog extends AbstractSessionLog
         switch (level)
         {
             case ALL:
-                throw new UnsupportedOperationException();
             case TRACE:
                 logger.trace(message);
                 break;
@@ -108,7 +107,7 @@ public class Slf4jSessionLog extends AbstractSessionLog
                 logger.error(message);
                 break;
             case OFF:
-                throw new UnsupportedOperationException();
+                break;
             default:
                 logger.info(message);
                 break;
@@ -120,7 +119,6 @@ public class Slf4jSessionLog extends AbstractSessionLog
         switch (level)
         {
             case ALL:
-                throw new UnsupportedOperationException();
             case TRACE:
                 logger.trace(message, exception);
                 break;
@@ -137,7 +135,7 @@ public class Slf4jSessionLog extends AbstractSessionLog
                 logger.error(message, exception);
                 break;
             case OFF:
-                throw new UnsupportedOperationException();
+                break;
             default:
                 logger.info(message, exception);
                 break;

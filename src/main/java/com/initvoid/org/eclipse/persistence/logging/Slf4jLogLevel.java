@@ -6,9 +6,9 @@ import java.util.Map;
 public enum Slf4jLogLevel
 {
     ALL(new EclipseLinkLogLevel[] {
+        EclipseLinkLogLevel.ALL
     }),
     TRACE(new EclipseLinkLogLevel[] {
-        EclipseLinkLogLevel.ALL,
         EclipseLinkLogLevel.FINEST
     }),
     DEBUG(new EclipseLinkLogLevel[] {
@@ -31,6 +31,8 @@ public enum Slf4jLogLevel
 
     private static final Map<EclipseLinkLogLevel, Slf4jLogLevel> ECLIPSE_LINK_MAP = new HashMap<>();
 
+    private EclipseLinkLogLevel[] eclipseLinkLogLevels;
+
     static
     {
         for (Slf4jLogLevel slf4jLogLevel : values())
@@ -42,6 +44,11 @@ public enum Slf4jLogLevel
         }
     }
 
+    private Slf4jLogLevel(EclipseLinkLogLevel[] eclipseLinkLogLevels)
+    {
+        this.eclipseLinkLogLevels = eclipseLinkLogLevels;
+    }
+
     public static Slf4jLogLevel getByEclipseLinkLogLevel(int eclipseLinkLogLevelValue)
     {
         EclipseLinkLogLevel eclipseLinkLogLevel = EclipseLinkLogLevel.getByValue(eclipseLinkLogLevelValue);
@@ -51,12 +58,5 @@ public enum Slf4jLogLevel
     public static Slf4jLogLevel getByEclipseLinkLogLevel(EclipseLinkLogLevel eclipseLinkLogLevel)
     {
         return ECLIPSE_LINK_MAP.get(eclipseLinkLogLevel);
-    }
-
-    private EclipseLinkLogLevel[] eclipseLinkLogLevels;
-    
-    private Slf4jLogLevel(EclipseLinkLogLevel[] eclipseLinkLogLevels)
-    {
-        this.eclipseLinkLogLevels = eclipseLinkLogLevels;
     }
 }
